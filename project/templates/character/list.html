@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Characters List</title>
+  </head>
+  <body>
+    <header
+      class="w-full h-[3.75rem] bg-green-500 flex items-center justify-center fixed top-0 z-1"
+    >
+      <nav class="w-[90%] h-full flex items-center justify-between">
+        <div class="font-bold text-xl">
+          <h3>Characters List</h3>
+        </div>
+        <ul>
+          <li>
+            <a
+              href="{% url 'home' %}"
+              class="border rounded px-4 py-1 bg-green-700 transition-colors hover:bg-green-600 text-white font-semibold"
+              >Home</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="w-full mt-20 flex justify-center">
+      <ul class="w-[90%] flex flex-wrap justify-between">
+        {% if character_list|length == 0 %}
+        <h3
+          class="w-[24.5%] font-bold mb-4 p-4 border rounded-md flex flex-col items-center bg-green-600"
+        >
+          No characters found
+        </h3>
+        {% else %} {% for character in character_list %}
+        <li
+          class="w-[24.5%] mb-4 p-4 border rounded-md flex flex-col items-center gap-2 bg-green-600"
+        >
+          <img
+            src="{{ character.image }}"
+            alt="{{character.name}}"
+            class="rounded-md"
+          />
+          <span class="w-full font-semibold truncate"
+            >Name: {{ character.name }}</span
+          >
+          <span class="w-full font-semibold"
+            >Status: {{ character.status }}</span
+          >
+          <span class="w-full font-semibold truncate"
+            >Type: {{ character.char_type }}</span
+          >
+          <span class="w-full font-semibold truncate"
+            >Especies: {{ character.species }}</span
+          >
+          <span class="w-full font-semibold truncate"
+            >Gender: {{ character.gender }}</span
+          >
+        </li>
+        {% endfor %} {% endif %}
+      </ul>
+    </main>
+  </body>
+</html>
